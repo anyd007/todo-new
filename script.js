@@ -33,6 +33,7 @@ const DOMElementCreate = () => {
   btnAdd = document.querySelector(".btn-add");
   todoList = document.querySelector(".todolist ul");
   errorInfo = document.querySelector(".error-info");
+  errorInfo.textContent = "DODAJ NOWE ZADANIE DO WYKONANIA";
   popupMain = document.querySelector(".popup");
   popupInfo = document.querySelector(".popup-info");
   popupInput = document.querySelector(".popup-input");
@@ -40,6 +41,7 @@ const DOMElementCreate = () => {
   popupCencel = document.querySelector(".cancel");
   sayYourName = document.querySelector(".name");
   BtnName = document.querySelector(".add-name");
+  nameAddMainDiv = document.querySelector(".edit-main");
 };
 const openNewTask = () => {
   //stworzenie nowego zadania
@@ -63,15 +65,15 @@ const createButtons = () => {
 
   const acceptBtn = document.createElement("button");
   acceptBtn.classList.add("complete");
-  acceptBtn.innerHTML = '<i class="far fa-check-circle"></i>';
+  acceptBtn.innerHTML = '<i class="far fa-check-circle fa-2x"></i>';
 
   const editBtn = document.createElement("button");
   editBtn.classList.add("edit");
-  editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+  editBtn.innerHTML = '<i class="fas fa-edit fa-2x"></i>';
 
   const deleteBtn = document.createElement("button");
-  deleteBtn.classList.add("delete");
-  deleteBtn.innerHTML = '<i class="fas fa-ban"></i>';
+  deleteBtn.classList.add("delete2");
+  deleteBtn.innerHTML = '<i class="fas fa-ban fa-2x"></i>';
 
   mainAreaBtn.append(acceptBtn, editBtn, deleteBtn);
 };
@@ -81,7 +83,7 @@ const btnListener = (e) => {
   if (e.target.matches(".complete")) {
     e.target.closest("li").classList.toggle("completed");
     e.target.classList.toggle("completed");
-  } else if (e.target.matches(".delete")) {
+  } else if (e.target.matches(".delete2")) {
     e.target.closest("li").remove();
     emptyList();
   } else if (e.target.matches(".edit")) {
@@ -134,21 +136,37 @@ const newName = () => {
   //wprowadzanie imienia do listy
   if (sayYourName.value !== "") {
     const addName = sayYourName.value;
-    title.textContent = `WITAJ ${addName}!\nOTO TWOJA LISTA ZADAŃ`;
+    title.textContent = `WITAJ ${addName} !\nOTO TWOJA LISTA ZADAŃ`;
     sayYourName.value = "";
   } else {
     title.textContent = "LISTA ZADAŃ";
   }
 };
-const nameEnter = e =>{
-    if(e.key === 'Enter'){
-        newName();
-    }
-}
+const nameEnter = (e) => {
+  if (e.key === "Enter") {
+    newName();
+  }
+};
+const zoomBox = () => {
+  todoMain.classList.add("zoom");
+};
+const zoomOutBox = () => {
+  todoMain.classList.remove("zoom");
+};
+const zoomBox2 = () => {
+    nameAddMainDiv.classList.add("zoom");
+  };
+  const zoomOutBox2 = () => {
+    nameAddMainDiv.classList.remove("zoom");
+  };
 
 const DOMEventsCreate = () => {
+    nameAddMainDiv.addEventListener("mouseover", zoomBox2);
+nameAddMainDiv.addEventListener("mouseleave", zoomOutBox2);
+  todoMain.addEventListener("mouseleave", zoomOutBox);
+  todoMain.addEventListener("mouseover", zoomBox);
   BtnName.addEventListener("click", newName);
-  sayYourName.addEventListener('keyup', nameEnter);
+  sayYourName.addEventListener("keyup", nameEnter);
   popupAccept.addEventListener("click", acceptPopupBtn);
   popupCencel.addEventListener("click", closePopup);
   todoList.addEventListener("click", btnListener);

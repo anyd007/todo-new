@@ -1,1 +1,2 @@
 # todo-new
+Ulepszona wersja Todo Listy, projekt mający na celu rozszerzanie swoich umiejętności w pisaniu kodu JS oraz CSS. Dodatkowo dodany input z możliwości dodania imienia oraz dodanie tła w postaci responsywnego video zamkniętego w loopie
